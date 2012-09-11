@@ -14,7 +14,7 @@ $JSKK.Class.create
 		},
 		Type:
 		{
-			INSTRUCTION:	'strappy.signal.ccl.instruction'
+			INSTRUCTION:	'strappy.type.ccl.instruction'
 		}
 	},
 	{}
