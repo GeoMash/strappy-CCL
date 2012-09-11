@@ -17,6 +17,7 @@ $JSKK.Class.create
 		{
 			attachTo:		null,
 			ref:			null,
+			cmp:			null,
 			signalKey:		null,
 			cls:			null,
 			style:			null,
@@ -33,9 +34,7 @@ $JSKK.Class.create
 			 * 
 			 * @cfg layout {String}
 			 */
-			layout:			'auto',
-			layoutConfig:	null//,
-			// relativeWrapper:false
+			layout:			'auto'
 		},
 		components:
 		{
