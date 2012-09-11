@@ -3,11 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.container.controller',
 		$name:		'CardLayout',
-		$extends:	strappy.mvc.Controller,
-		$uses:
-		[
-			strappy.ccl.container.trait.Children
-		]
+		$extends:	strappy.mvc.Controller
 	}
 )
 (
