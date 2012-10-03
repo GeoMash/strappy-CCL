@@ -10,12 +10,14 @@ $JSKK.Class.create
 		version:			'1.0.0',
 		Signal:
 		{
-			SWITCH:			'strappy.signal.ccl.switch'
+			SWITCH:			'strappy.signal.ccl.switch',
+			SPINNER_CHANGE:	'strappy.signal.ccl.spinner.change'
 		},
 		Type:
 		{
-			INSTRUCTION:	'strappy.type.ccl.instruction'
+			INSTRUCTION:	'strappy.type.ccl.instruction',
+			CHANGE:			'strappy.type.ccl.change'
 		}
 	},
 	{}
-);
+);k
