@@ -1,12 +1,12 @@
 $JSKK.Class.create
-	(
+(
 	{
-	$namespace:	'strappy.ccl.container.controller',
+		$namespace:	'strappy.ccl.container.controller',
 		$name:		'HTMLLayout',
 		$extends:	strappy.mvc.Controller
 	}
-	)
-	(
+)
+(
 	{},
 	{
 		init: function()
@@ -21,7 +21,7 @@ $JSKK.Class.create
 		},
 		onChangeCard: function(signal)
 		{
-
+			
 		}
 	}
-	);
+);
