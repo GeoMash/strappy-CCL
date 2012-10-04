@@ -29,13 +29,13 @@ $JSKK.Class.create
 				'controller:Default',
 				'onControlMousedown'
 			);
-            this.bindDOMEvent
-                (
-                    'click.spinner',
-                    [this.getContainer(), '.controller'],
-                    'controller:Default',
-                    'onControlClick'
-                );
+			this.bindDOMEvent
+				(
+					'click.spinner',
+					[this.getContainer(), '.controller'],
+					'controller:Default',
+					'onControlClick'
+				);
 			// don't need these event if we aren't going to continuously change the value on mousedown
 			if (this.getConfig('doContinuous')) {
 				this.bindDOMEvent
@@ -68,9 +68,10 @@ $JSKK.Class.create
 		},
 		renderTemplate: function()
 		{
-            this.getContainer().addClass(this.getConfig('spinnerClass'));
-            this.setExtraClasses(this.getConfig('spinnerExtraClasses'), this.getContainer());
-            this.getContainer().append(this.getTemplate('Spinner'));
+			this.getContainer().addClass(this.getConfig('spinnerClass'));
+			this.setExtraClasses(this.getConfig('spinnerExtraClasses'), this.getContainer());
+			this.getContainer().append(this.getTemplate('Spinner'));
+			this.find('input').name(this.getConfig('name'));
 		},
 		getInput: function()
 		{
@@ -91,13 +92,13 @@ $JSKK.Class.create
 		{
 			return this.getInput().val(value);
 		},
-        setExtraClasses: function(classes, element)
-        {
-            if (classes.length != 0 && element instanceof jQuery) {
-                $.each(classes, function(index, className) {
-                    element.addClass(className);
-                });
-            }
-        }
+		setExtraClasses: function(classes, element)
+		{
+			if (classes.length != 0 && element instanceof jQuery) {
+				$.each(classes, function(index, className) {
+					element.addClass(className);
+				});
+			}
+		}
 	}
 );
