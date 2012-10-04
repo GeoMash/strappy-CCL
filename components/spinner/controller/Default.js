@@ -32,7 +32,7 @@ $JSKK.Class.create
 						type:	strappy.CCL.Type.CHANGE,
 						filter:
 						{
-							key:					LeadGen2Reporting.component.Application.Key.CALENDAR_TIME,
+							key:					this.getConfig('signalKey'),
 							destination:			this.getConfig('signalReceiveDestination')
 						}
 					}
