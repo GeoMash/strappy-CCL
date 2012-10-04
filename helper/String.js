@@ -28,4 +28,4 @@ $JSKK.Class.create
 	{}
 );
 //Singleton
-strappy.helper.String=new strappy.helper.String();
+strappy.ccl.helper.String=new strappy.ccl.helper.String();
