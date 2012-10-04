@@ -21,23 +21,23 @@ $JSKK.Class.create
 		},
 		bindDOMEvents: function()
 		{
-			
 			this.bindDOMEvent
 			(
-				'mousedown.spinner',
+				'click.spinner',
 				[this.getContainer(), '.controller'],
 				'controller:Default',
-				'onControlMousedown'
+				'onControlClick'
 			);
-			this.bindDOMEvent
+			// don't need these event if we aren't going to continuously change the value on mousedown
+			if (this.getConfig('doContinuous'))
+			{
+				this.bindDOMEvent
 				(
-					'click.spinner',
+					'mousedown.spinner',
 					[this.getContainer(), '.controller'],
 					'controller:Default',
-					'onControlClick'
+					'onControlMousedown'
 				);
-			// don't need these event if we aren't going to continuously change the value on mousedown
-			if (this.getConfig('doContinuous')) {
 				this.bindDOMEvent
 				(
 					'mouseup.spinner',
