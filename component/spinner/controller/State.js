@@ -39,7 +39,7 @@ $JSKK.Class.create
 		},
 		initialiseValue: function()
 		{
-			this.getStore('State').setCurrentValue(Tools.leftStrPad(this.getConfig('defaultValue'), this.getConfig('defaultPadding'), '0'));
+			this.getStore('State').setCurrentValue(strappy.ccl.helper.String.leftStrPad(this.getConfig('defaultValue'), this.getConfig('defaultPadding'), '0'));
 		},
 		increase: function()
 		{
@@ -68,7 +68,7 @@ $JSKK.Class.create
 					}
 				}
 
-				stateStore.setCurrentValue( Tools.leftStrPad(nextValue, this.getConfig('defaultPadding'), '0'));
+				stateStore.setCurrentValue( strappy.ccl.helper.String.leftStrPad(nextValue, this.getConfig('defaultPadding'), '0'));
 				
 			} else {
 				var values = this.getConfig('altValues');
@@ -107,7 +107,7 @@ $JSKK.Class.create
 					}
 				}
 				
-				stateStore.setCurrentValue( Tools.leftStrPad(previousValue, this.getConfig('defaultPadding'), '0'));
+				stateStore.setCurrentValue( strappy.ccl.helper.String.leftStrPad(previousValue, this.getConfig('defaultPadding'), '0'));
 				
 			} else {
 				var values = this.getConfig('altValues');
