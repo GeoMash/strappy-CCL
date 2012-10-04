@@ -93,7 +93,7 @@ $JSKK.Class.create
 			/**
 			 * @cfg {Function} acceleration Callback function, from parent component (or external library) to determine how fast the value changes accelerate
 			 */
-			accelerationFunction:	$JSKK.emptyFunction(),
+			accelerationFunction:	$JSKK.emptyFunction,
 			
 			
 			signalKey:					null,
