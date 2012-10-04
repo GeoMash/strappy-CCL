@@ -20,4 +20,4 @@ $JSKK.Class.create
 		}
 	},
 	{}
-);k
+);
