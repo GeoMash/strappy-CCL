@@ -38,7 +38,7 @@ $JSKK.Class.create
 					}
 				}
 			);
-			
+			.
 		},
 		onTemplatesLoaded: function(view)
 		{
@@ -57,12 +57,7 @@ $JSKK.Class.create
 		onValueChange: function(signal)
 		{
 			var signalBody = signal.getBody();
-			
-			// check if the signal was for this spinner
-			if (signalBody.source == this.getConfig('name')) {
-				this.getStore('State').setCurrentValue (signalBody.value);
-			}
-			
+			this.getStore('State').setCurrentValue(signalBody.value);
 		},
 		onControlMousedown: function(ev)
 		{
@@ -191,15 +186,14 @@ $JSKK.Class.create
 			var currentValue = this.getStore('State').get('currentValue');
 			this.sendSignal
 			(
-				LeadGen2Reporting.component.Application.Signal.SPIN_CHANGE,
-				LeadGen2Reporting.component.Application.Type.CLICK,
+				strappy.CCL.Signal.SPINNER_CHANGE,
+				strappy.CCL.Type.CHANGE,
 				{
 					key:			this.getConfig('signalKey'),
 					destination:	this.getConfig('signalSendDestination')
 				},
 				{
-					value:currentValue,
-					source: this.getConfig('name')
+					value:	currentValue
 				}
 			);
 				
