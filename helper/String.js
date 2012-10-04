@@ -27,5 +27,3 @@ $JSKK.Class.create
 	},
 	{}
 );
-//Singleton
-strappy.ccl.helper.String=new strappy.ccl.helper.String();
