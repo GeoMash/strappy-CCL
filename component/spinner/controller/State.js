@@ -15,11 +15,11 @@ $JSKK.Class.create
 			this.getView('Default').observe('onReady',this.onViewReady.bind(this));
 			
 			this.bindStateChanges
-            (
-                {
-                    currentValue:	'onCurrentValueChanged'
-                }
-            );
+			(
+				{
+					currentValue:	'onCurrentValueChanged'
+				}
+			);
 		},
 		onBeforeChange: function(state, key, value)
 		{
