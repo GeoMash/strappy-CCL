@@ -15,9 +15,7 @@ $JSKK.Class.create
 			
 			name:					'',
 
-            spinnerClass:			'spinner-container',
-
-            spinnerExtraClasses:	[],
+			cls:			'spinner-container',
 
 			/**
 			 * @cfg {Integer} defaultValue Value to display on load

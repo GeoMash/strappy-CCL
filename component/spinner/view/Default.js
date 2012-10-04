@@ -68,8 +68,7 @@ $JSKK.Class.create
 		},
 		renderTemplate: function()
 		{
-			this.getContainer().addClass(this.getConfig('spinnerClass'));
-			this.setExtraClasses(this.getConfig('spinnerExtraClasses'), this.getContainer());
+			this.getContainer().addClass(this.getConfig('cls'));
 			this.getContainer().append(this.getTemplate('Spinner'));
 			this.find('input').attr('name',this.getConfig('name'));
 		},
@@ -91,14 +90,6 @@ $JSKK.Class.create
 		setInputValue: function(value)
 		{
 			return this.getInput().val(value);
-		},
-		setExtraClasses: function(classes, element)
-		{
-			if (classes.length != 0 && element instanceof jQuery) {
-				$.each(classes, function(index, className) {
-					element.addClass(className);
-				});
-			}
 		}
 	}
 );
