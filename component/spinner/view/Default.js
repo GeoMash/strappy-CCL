@@ -71,7 +71,7 @@ $JSKK.Class.create
 			this.getContainer().addClass(this.getConfig('spinnerClass'));
 			this.setExtraClasses(this.getConfig('spinnerExtraClasses'), this.getContainer());
 			this.getContainer().append(this.getTemplate('Spinner'));
-			this.find('input').name(this.getConfig('name'));
+			this.find('input').attr('name',this.getConfig('name'));
 		},
 		getInput: function()
 		{
