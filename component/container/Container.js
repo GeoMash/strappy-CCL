@@ -1,7 +1,7 @@
 $JSKK.Class.create
 (
 	{
-		$namespace:	'strappy.ccl',
+		$namespace:	'strappy.ccl.component',
 		$name:		'Container',
 		$extends:	strappy.Component
 	}
