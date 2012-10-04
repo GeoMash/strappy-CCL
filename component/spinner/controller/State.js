@@ -74,9 +74,14 @@ $JSKK.Class.create
 				var values = this.getConfig('altValues');
 				var currentPosition = $.inArray(currentValue, values);
 				
+				
 				if (currentPosition < (values.length - 1)) {
 					currentPosition++;
 					stateStore.setCurrentValue(values[currentPosition]);
+				}
+				else if (doLoop)
+				{
+					stateStore.setCurrentValue(values[0]);
 				}
 				
 				
@@ -117,6 +122,10 @@ $JSKK.Class.create
 				if (currentPosition > 0) {
 					currentPosition--;
 					stateStore.setCurrentValue(values[currentPosition]);
+				}
+				else if (doLoop)
+				{
+					stateStore.setCurrentValue(values[(values.length - 1)]);
 				}
 				
 			}
