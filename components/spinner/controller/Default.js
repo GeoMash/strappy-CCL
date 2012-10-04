@@ -38,7 +38,6 @@ $JSKK.Class.create
 					}
 				}
 			);
-			.
 		},
 		onTemplatesLoaded: function(view)
 		{
