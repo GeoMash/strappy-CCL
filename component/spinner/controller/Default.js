@@ -50,7 +50,7 @@ $JSKK.Class.create
 			
 			this.getController('State').initialiseValue();
 			
-			this.sendValue();
+			// this.sendValue();
 			
 		},
 		onValueChange: function(signal)
