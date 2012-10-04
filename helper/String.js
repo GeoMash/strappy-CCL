@@ -23,7 +23,7 @@ $JSKK.Class.create
 				o = s + o;
 			}
 			return prefix + o;
-		},
+		}
 	},
 	{}
 );
