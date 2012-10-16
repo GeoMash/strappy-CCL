@@ -28,6 +28,13 @@ $JSKK.Class.create
 				'controller:Default',
 				'onControlClick'
 			);
+            this.bindDOMEvent
+            (
+                'focusout.spinner',
+                [this.getContainer(), 'input.active'],
+                'controller:Default',
+                'onInputFocusout'
+            );
 			// don't need these event if we aren't going to continuously change the value on mousedown
 			if (this.getConfig('doContinuous'))
 			{

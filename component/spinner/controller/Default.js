@@ -107,6 +107,46 @@ $JSKK.Class.create
 			this.controlFocus = false;
 			
 		},
+        onInputFocusout: function()
+        {
+            var newValue = this.getView('Default').getInputValue();
+            var store = this.getStore('State');
+            if (this.getConfig('useNumeric'))
+            {
+                if( !isNaN(parseFloat(newValue)))
+                {
+                    if(parseFloat(newValue) >= this.getConfig('minValue') && parseFloat(newValue) <= this.getConfig('maxValue'))
+                    {
+                        //set new value
+                        this.setUserInputValue(strappy.ccl.helper.String.leftStrPad(newValue, this.getConfig('defaultPadding'), '0'));
+                    } else if(parseFloat(newValue) < this.getConfig('minValue'))
+                    {
+                        //user input is less than min value. therefore setting min value
+                        this.setUserInputValue(strappy.ccl.helper.String.leftStrPad(this.getConfig('minValue'), this.getConfig('defaultPadding'), '0'));
+                    } else {
+                        //user input is greater than min value. therefore setting min value
+                        this.setUserInputValue(strappy.ccl.helper.String.leftStrPad(this.getConfig('maxValue'), this.getConfig('defaultPadding'), '0'));
+                    }
+                } else {
+                    //setting current value
+                    this.getView('Default').setInputValue(store.get('currentValue'));
+                }
+            } else {
+                if (this.getConfig('altValues').inArray(newValue)) {
+                    //set new value
+                    this.setUserInputValue(newValue);
+                } else {
+                    //incorrect input
+                    this.getView('Default').setInputValue(store.get('currentValue'));
+                }
+            }
+        },
+        setUserInputValue: function(val)
+        {
+            this.getView('Default').setInputValue(val);
+            this.getStore('State').setCurrentValue(val);
+            this.sendValue();
+		},
 		rotateSpinner: function(target)
 		{
 			
