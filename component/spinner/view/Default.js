@@ -82,7 +82,7 @@ $JSKK.Class.create
 		getInput: function()
 		{
 			if (this.input === null) {
-				this.input = $('input', this.getContainer());
+				this.input = this.find('input');
 			}
 			return this.input;
 		},
