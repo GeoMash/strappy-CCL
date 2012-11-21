@@ -93,7 +93,7 @@ $JSKK.Trait.create
 					
 					//Configure it to attach itself to THIS container.
 					children[i].attachTo='#'+this.getIID();
-					if (Object.isNull(this.getConfig('bodySelector')))
+					if (!Object.isNull(this.getConfig('bodySelector')))
 					{
 						children[i].attachTo+=' '+this.getConfig('bodySelector');
 					}
