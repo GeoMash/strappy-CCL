@@ -25,6 +25,11 @@ $JSKK.Class.create
 				this.initChildren();
 			}
 		},
+		/**
+		 * Iterates over the children config and inits them into
+		 * this components containing div.
+		 * @return {Void}
+		 */
 		initChildren: function()
 		{
 			var	parent			=this.getParentComponent(),
@@ -32,10 +37,12 @@ $JSKK.Class.create
 				thisChildCmp	=null;
 			if (!Object.isNull(children))
 			{
+				//Work with arrays. So convert if not already.
 				if (!Object.isArray(children))
 				{
 					children=[children];
 				}
+				//Iterate over each child component.
 				for (var i=0,j=children.length; i<j; i++)
 				{
 					if (Object.isUndefined(children[i].cmp))
