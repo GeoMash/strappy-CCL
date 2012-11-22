@@ -33,7 +33,16 @@ $JSKK.Trait.create
 			//If HTML has been specified, ignore children.
 			if (Object.isString(this.getConfig('html')))
 			{
-				this.getView('Default').getContainer().append(this.getConfig('html'));
+				if (!Object.isNull(this.getConfig('bodySelector')))
+				{
+					this.getView('Default')	.getContainer()
+											.find(this.getConfig('bodySelector'))
+											.append(this.getConfig('html'));
+				}
+				else
+				{
+					this.getView('Default').getContainer().append(this.getConfig('html'));
+				}
 				parent.fireEvent('onChildReady',this.getConfig('fullRef')+'.html',this);
 			}
 			//HTML was not specified, so handle the children if there are any.
