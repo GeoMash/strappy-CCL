@@ -17,7 +17,7 @@ $JSKK.Class.create
 		},
 		onViewReady: function()
 		{
-			$('[data-strappy-route]').click(this.onClickableRoute.bind(this));
+			$('body').on('click','[data-strappy-route]',null,this.onClickableRoute.bind(this));
 		},
 		onClickableRoute: function(event)
 		{
