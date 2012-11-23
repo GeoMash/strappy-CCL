@@ -1,7 +1,7 @@
 $JSKK.Trait.create
 (
 	{
-		$namespace:	'strappy.CCL.trait',
+		$namespace:	'strappy.ccl.trait',
 		$name:		'Containable'
 	}
 )
