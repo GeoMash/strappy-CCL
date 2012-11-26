@@ -5,7 +5,7 @@ $JSKK.Class.create
 		$name:		'Pluploadable',
 		$uses:
 		[
-			$PWT.trait.Observable
+			$JSKK.trait.Observable
 		]
 	}
 )
@@ -23,7 +23,7 @@ $JSKK.Class.create
 		initUploader: function()
 		{
 			this.uploader=new plupload.Uploader();
-			this.bind('Init'			this.onInit.bind(this));
+			this.bind('Init',			this.onInit.bind(this));
 			this.bind('FilesAdded',		this.onFilesAdded.bind(this));
 			this.bind('UploadProgress',	this.onUploadProgress.bind(this));
 			this.bind('Error',			this.onError.bind(this));
