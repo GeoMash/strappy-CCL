@@ -6,7 +6,7 @@ $JSKK.Class.create
 		$extends:	strappy.mvc.Controller,
 		$uses:
 		[
-			strappy.CCL.trait.Containable
+			strappy.ccl.trait.Containable
 		]
 	}
 )
