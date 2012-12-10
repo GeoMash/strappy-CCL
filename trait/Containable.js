@@ -64,7 +64,7 @@ $JSKK.Trait.create
 						}
 						else
 						{
-							children[i].cmp='strappy.ccl.Container';
+							children[i].cmp='strappy.ccl.component.Container';
 						}
 					}
 					//Set the parent ref.

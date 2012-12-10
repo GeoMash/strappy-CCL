@@ -54,7 +54,7 @@ $JSKK.Class.create
 					{
 						if (Object.isUndefined(children[i].cmp))
 						{
-							children[i].cmp='strappy.ccl.Container';
+							children[i].cmp='strappy.ccl.component.Container';
 						}
 						//Set the parent ref.
 						if (this.getConfig('ref') && Object.isDefined(children[i].ref))
