@@ -28,6 +28,8 @@ $JSKK.Trait.create
 		{
 			var	parent			=this.getParentComponent(),
 				children		=this.getConfig('children'),
+				childInstances	=[],
+				readyChildren	=0,
 				thisChildCmp	=null;
 			
 			//If HTML has been specified, ignore children.
@@ -79,14 +81,14 @@ $JSKK.Trait.create
 						children[i].fullRef		=children[i].parentRef+'.'+children[i].ref;
 					}
 					//Create an instance of the child component.
-					thisChildCmp=parent.newChildComponent(children[i].cmp,children[i].ref);
+					childInstances[i]=parent.newChildComponent(children[i].cmp,children[i].ref);
 					
 					/*
 					 Bind observer for child events.
 					 This will recursively redirect all child onChildReady events
 					 up to the parent onChildReady observer.
 					 */
-					thisChildCmp.observe
+					childInstances[i].observe
 					(
 						'onChildReady',
 						function(ref,child)
@@ -112,7 +114,7 @@ $JSKK.Trait.create
 						function()
 						{
 							return Object.isDefined(this._controllers.State);
-						}.bind(thisChildCmp)
+						}.bind(childInstances[i])
 					).isTrue
 					(
 						function()
@@ -122,14 +124,38 @@ $JSKK.Trait.create
 								'onReadyState',
 								function()
 								{
+									//Check if all children are ready.
+									if (++readyChildren===children.length)
+									{
+										var el		=null,
+											testEl	=null;
+										//Now check if each child is in the correct order.
+										for (var i=0,j=children.length; i<j; i++)
+										{
+											el=$('#'+childInstances[i].getIID());
+											testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
+											//The elements must match otherwise they're in the wrong order.
+											if (el[0]!=testEl[0])
+											{
+												//Wrong order - so now we must reorder the elements.
+												var parentEl=$(children[0].appendTo);
+												parentEl.children().remove();
+												for (var k=0,l=children.length; k<l; k++)
+												{
+													parentEl.append(children[i]);
+												}
+												break;
+											}
+										}
+									}
 									parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
 								}
 							);
-						}.bind(thisChildCmp)
+						}.bind(childInstances[i])
 					);
 					
 					//Configure the component.
-					thisChildCmp.configure(children[i]);
+					childInstances[i].configure(children[i]);
 				}
 			}
 		}
