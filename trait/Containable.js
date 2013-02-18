@@ -28,11 +28,8 @@ $JSKK.Trait.create
 		{
 			this.childInstances			=[];
 			this.readyChildren			=0;
-			
 			var	parent			=this.getParentComponent(),
 				children		=this.getConfig('children'),
-				childInstances	=[],
-				readyChildren	=0,
 				thisChildCmp	=null;
 			
 			//If HTML has been specified, ignore children.
@@ -68,7 +65,7 @@ $JSKK.Trait.create
 		addChild: function(child,i)
 		{
 			var	parent			=this.getParentComponent(),
-				children		=this.getConfig('children');
+				children		=this.getConfig('children') || [];
 			if (Object.isUndefined(child.cmp))
 			{
 				if (!Object.isNull(this.getConfig('defaultChildCmp')))
@@ -139,45 +136,43 @@ $JSKK.Trait.create
 			(
 				function()
 				{
-							this._controllers.State.observeOnce
-							(
-								'onReadyState',
-								function()
+					this._controllers.State.observeOnce
+					(
+						'onReadyState',
+						function()
+						{
+							//Check if all children are ready.
+							if (++this.readyChildren===children.length)
+							{
+								var el		=null,
+									testEl	=null;
+								//Now check if each child is in the correct order.
+								for (var i=0,j=children.length; i<j; i++)
 								{
-									//Check if all children are ready.
-									if (++readyChildren===children.length)
+									el=$('#'+this.childInstances[i].getIID());
+									testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
+									//The elements must match otherwise they're in the wrong order.
+									if (el[0]!=testEl[0])
 									{
-										var el		=null,
-											testEl	=null;
-										//Now check if each child is in the correct order.
-										for (var i=0,j=children.length; i<j; i++)
+										//Wrong order - so now we must reorder the elements.
+										var parentEl=$(children[0].appendTo);
+										parentEl.children().remove();
+										for (var k=0,l=children.length; k<l; k++)
 										{
-											el=$('#'+this.childInstances[i].getIID());
-											testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
-											//The elements must match otherwise they're in the wrong order.
-											if (el[0]!=testEl[0])
-											{
-												//Wrong order - so now we must reorder the elements.
-												var parentEl=$(children[0].appendTo);
-												parentEl.children().remove();
-												for (var k=0,l=children.length; k<l; k++)
-												{
-													parentEl.append(children[i]);
-												}
-												break;
-											}
+											parentEl.append(children[i]);
 										}
+										break;
 									}
-									parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
 								}
-							);
-						}.bind(this.childInstances[i])
+							}
+							parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
+						}
 					);
+				}.bind(this.childInstances[i])
+			);
 					
-					//Configure the component.
-					this.childInstances[i].configure(child);
-				}
-			}
+			//Configure the component.
+			this.childInstances[i].configure(child);
 		}
 	}
 );
