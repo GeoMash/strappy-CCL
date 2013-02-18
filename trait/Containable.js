@@ -16,7 +16,7 @@ $JSKK.Trait.create
 			html:				null,					//string
 			bodySelector:		null,					//string
 			defaultChildCmp:	'strappy.ccl.Container'	//string
-		}
+		},
 		 */
 		
 		/**
@@ -26,6 +26,9 @@ $JSKK.Trait.create
 		 */
 		initChildren: function()
 		{
+			this.childInstances			=[];
+			this.readyChildren			=0;
+			
 			var	parent			=this.getParentComponent(),
 				children		=this.getConfig('children'),
 				childInstances	=[],
@@ -58,67 +61,84 @@ $JSKK.Trait.create
 				//Iterate over each child component.
 				for (var i=0,j=children.length; i<j; i++)
 				{
-					if (Object.isUndefined(children[i].cmp))
-					{
-						if (!Object.isNull(this.getConfig('defaultChildCmp')))
-						{
-							children[i].cmp=this.getConfig('defaultChildCmp');
-						}
-						else
-						{
-							children[i].cmp='strappy.ccl.component.Container';
-						}
-					}
-					//Set the parent ref.
-					if (this.getConfig('ref') && Object.isDefined(children[i].ref))
-					{
-						var parentRef='';
-						if (this.getConfig('parentRef'))
-						{
-							parentRef=this.getConfig('parentRef')+'.';
-						}
-						children[i].parentRef	=parentRef+this.getConfig('ref');
-						children[i].fullRef		=children[i].parentRef+'.'+children[i].ref;
-					}
-					//Create an instance of the child component.
-					childInstances[i]=parent.newChildComponent(children[i].cmp,children[i].ref);
-					
-					/*
-					 Bind observer for child events.
-					 This will recursively redirect all child onChildReady events
-					 up to the parent onChildReady observer.
-					 */
-					childInstances[i].observe
-					(
-						'onChildReady',
-						function(ref,child)
-						{
-							var args=$JSKK.toArray(arguments);
-							args.unshift('onChildReady');
-							parent.fireEvent.apply(parent,args);
-						}.bind(this)
-					);
-					
-					//Remove the reference to the component prototype.
-					delete children[i].cmp;
-					
-					//Configure it to attach itself to THIS container.
-					children[i].attachTo='#'+this.getIID();
-					if (!Object.isNull(this.getConfig('bodySelector')))
-					{
-						children[i].attachTo+=' '+this.getConfig('bodySelector');
-					}
-					
-					$JSKK.when
-					(
-						function()
-						{
-							return Object.isDefined(this._controllers.State);
-						}.bind(childInstances[i])
-					).isTrue
-					(
-						function()
-						{
+					this.addChild(children[i],i);
+				}
+			}
+		},
+		addChild: function(child,i)
+		{
+			var	parent			=this.getParentComponent(),
+				children		=this.getConfig('children');
+			if (Object.isUndefined(child.cmp))
+			{
+				if (!Object.isNull(this.getConfig('defaultChildCmp')))
+				{
+					child.cmp=this.getConfig('defaultChildCmp');
+				}
+				else
+				{
+					child.cmp='strappy.ccl.Container';
+				}
+			}
+			//Set the parent ref.
+			if (this.getConfig('ref') && Object.isDefined(child.ref))
+			{
+				var parentRef='';
+				if (this.getConfig('parentRef'))
+				{
+					parentRef=this.getConfig('parentRef')+'.';
+				}
+				else
+				{
+					parentRef=this.$reflect('name');
+				}
+				child.parentRef		=parentRef+this.getConfig('ref');
+				child.fullRef		=child.parentRef+'.'+child.ref;
+			}
+			else if (Object.isDefined(child.ref))
+			{
+				child.parentRef		=this.$reflect('name');
+				child.fullRef		=child.parentRef+'.'+child.ref;
+			}
+			//Create an instance of the child component.
+			this.childInstances[i]=parent.newChildComponent(child.cmp,child.ref);
+			
+			/*
+			 Bind observer for child events.
+			 This will recursively redirect all child onChildReady events
+			 up to the parent onChildReady observer.
+			 */
+			this.childInstances[i].observe
+			(
+				'onChildReady',
+				function(ref,child)
+				{
+					var args=$JSKK.toArray(arguments);
+					args.unshift('onChildReady');
+					parent.fireEvent.apply(parent,args);
+				}.bind(this)
+			);
+			
+			//Remove the reference to the component prototype.
+			delete child.cmp;
+			
+			//Configure it to attach itself to THIS container.
+			child.attachTo='#'+this.getIID();
+			if (!Object.isNull(this.getConfig('bodySelector')))
+			{
+				child.attachTo+=' '+this.getConfig('bodySelector');
+			}
+			
+			$JSKK.when
+			(
+				function()
+				{
+					return Object.isDefined(this._controllers.State);
+				}.bind(this.childInstances[i])
+			).isTrue
+			(
+				function()
+				{
 							this._controllers.State.observeOnce
 							(
 								'onReadyState',
@@ -132,7 +152,7 @@ $JSKK.Trait.create
 										//Now check if each child is in the correct order.
 										for (var i=0,j=children.length; i<j; i++)
 										{
-											el=$('#'+childInstances[i].getIID());
+											el=$('#'+this.childInstances[i].getIID());
 											testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
 											//The elements must match otherwise they're in the wrong order.
 											if (el[0]!=testEl[0])
@@ -151,11 +171,11 @@ $JSKK.Trait.create
 									parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
 								}
 							);
-						}.bind(childInstances[i])
+						}.bind(this.childInstances[i])
 					);
 					
 					//Configure the component.
-					childInstances[i].configure(children[i]);
+					this.childInstances[i].configure(child);
 				}
 			}
 		}
