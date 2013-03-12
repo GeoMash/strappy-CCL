@@ -34,7 +34,7 @@ $JSKK.Class.create
 			this._rootNS=$JSKK.namespace(this.$reflect('namespace').split('.').first());
 			
 			this.init.$parent();
-			this.getController('State')	.observe('onReadyState',this.onReadyState.bind(this));
+			this.cmp().observe('onReadyState',this.onReadyState.bind(this));
 			
 			if (Object.isString(this.BTL))
 			{
