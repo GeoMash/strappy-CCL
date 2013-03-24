@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.container.controller',
 		$name:		'HTMLLayout',
-		$extends:	strappy.mvc.Controller
+		$extends:	'strappy.mvc.Controller'
 	}
 )
 (

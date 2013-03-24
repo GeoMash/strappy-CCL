@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.spinner.store',
 		$name:		'State',
-		$extends:	strappy.data.stateful.Store
+		$extends:	'strappy.data.stateful.Store'
 	}
 )
 (

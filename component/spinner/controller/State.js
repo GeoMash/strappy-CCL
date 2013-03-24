@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.spinner.controller',
 		$name:		'State',
-		$extends:	strappy.mvc.stateful.Controller
+		$extends:	'strappy.mvc.stateful.Controller'
 	}
 )
 (

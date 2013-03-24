@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.controller',
 		$name:		'Router',
-		$extends:	strappy.mvc.Controller
+		$extends:	'strappy.mvc.Controller'
 	}
 )
 (

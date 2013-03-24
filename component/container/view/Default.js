@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.container.view',
 		$name:		'Default',
-		$extends:	strappy.mvc.View
+		$extends:	'strappy.mvc.View'
 	}
 )
 (

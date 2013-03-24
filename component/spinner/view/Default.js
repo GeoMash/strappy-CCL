@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.spinner.view',
 		$name:		'Default',
-		$extends:	strappy.mvc.View
+		$extends:	'strappy.mvc.View'
 	}
 )
 (

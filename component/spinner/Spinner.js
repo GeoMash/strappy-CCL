@@ -3,7 +3,7 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component',
 		$name:		'Spinner',
-		$extends:	strappy.Component
+		$extends:	'strappy.Component'
 	}
 )
 (

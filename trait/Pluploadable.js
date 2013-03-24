@@ -5,7 +5,7 @@ $JSKK.Class.create
 		$name:		'Pluploadable',
 		$uses:
 		[
-			$JSKK.trait.Observable
+			'$JSKK.trait.Observable'
 		]
 	}
 )

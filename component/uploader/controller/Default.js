@@ -3,10 +3,10 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.uploader.controller',
 		$name:		'Default',
-		$extends:	strappy.mvc.Controller,
+		$extends:	'strappy.mvc.Controller',
 		$uses:
 		[
-			strappy.ccl.trait.Pluploadable
+			'strappy.ccl.trait.Pluploadable'
 		]
 	}
 )

@@ -3,10 +3,10 @@ $JSKK.Class.create
 	{
 		$namespace:	'strappy.ccl.component.container.controller',
 		$name:		'AutoLayout',
-		$extends:	strappy.mvc.Controller,
+		$extends:	'strappy.mvc.Controller',
 		$uses:
 		[
-			strappy.ccl.trait.Containable
+			'strappy.ccl.trait.Containable'
 		]
 	}
 )
