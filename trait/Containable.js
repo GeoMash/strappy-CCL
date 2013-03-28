@@ -29,23 +29,23 @@ $JSKK.Trait.create
 			this.childInstances			=[];
 			this.readyChildren			=0;
 			var	parent			=this.getParentComponent(),
-				children		=this.getConfig('children'),
+				children		=this.getState('children'),
 				thisChildCmp	=null;
 			
 			//If HTML has been specified, ignore children.
-			if (Object.isString(this.getConfig('html')))
+			if (Object.isString(this.getState('html')))
 			{
-				if (!Object.isNull(this.getConfig('bodySelector')))
+				if (!Object.isNull(this.getState('bodySelector')))
 				{
 					this.getView('Default')	.getContainer()
-											.find(this.getConfig('bodySelector'))
-											.append(this.getConfig('html'));
+											.find(this.getState('bodySelector'))
+											.append(this.getState('html'));
 				}
 				else
 				{
-					this.getView('Default').getContainer().append(this.getConfig('html'));
+					this.getView('Default').getContainer().append(this.getState('html'));
 				}
-				parent.fireEvent('onChildReady',this.getConfig('fullRef')+'.html',this);
+				parent.fireEvent('onChildReady',this.getState('fullRef')+'.html',this);
 			}
 			//HTML was not specified, so handle the children if there are any.
 			else if (!Object.isNull(children))
@@ -65,12 +65,12 @@ $JSKK.Trait.create
 		addChild: function(child,i)
 		{
 			var	parent			=this.getParentComponent(),
-				children		=this.getConfig('children') || [];
+				children		=this.getState('children') || [];
 			if (Object.isUndefined(child.cmp))
 			{
-				if (!Object.isNull(this.getConfig('defaultChildCmp')))
+				if (!Object.isNull(this.getState('defaultChildCmp')))
 				{
-					child.cmp=this.getConfig('defaultChildCmp');
+					child.cmp=this.getState('defaultChildCmp');
 				}
 				else
 				{
@@ -78,18 +78,18 @@ $JSKK.Trait.create
 				}
 			}
 			//Set the parent ref.
-			if (this.getConfig('ref') && Object.isDefined(child.ref))
+			if (this.getState('ref') && Object.isDefined(child.ref))
 			{
 				var parentRef='';
-				if (this.getConfig('parentRef'))
+				if (this.getState('parentRef'))
 				{
-					parentRef=this.getConfig('parentRef')+'.';
+					parentRef=this.getState('parentRef')+'.';
 				}
 				else
 				{
 					parentRef=this.$reflect('name');
 				}
-				child.parentRef		=parentRef+this.getConfig('ref');
+				child.parentRef		=parentRef+this.getState('ref');
 				child.fullRef		=child.parentRef+'.'+child.ref;
 			}
 			else if (Object.isDefined(child.ref))
@@ -121,9 +121,9 @@ $JSKK.Trait.create
 			
 			//Configure it to attach itself to THIS container.
 			child.attachTo='#'+this.getIID();
-			if (!Object.isNull(this.getConfig('bodySelector')))
+			if (!Object.isNull(this.getState('bodySelector')))
 			{
-				child.attachTo+=' '+this.getConfig('bodySelector');
+				child.attachTo+=' '+this.getState('bodySelector');
 			}
 			
 			$JSKK.when
@@ -165,7 +165,7 @@ $JSKK.Trait.create
 									}
 								}
 							}
-							parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
+							parent.fireEvent('onChildReady',this.getState('fullRef'),this);
 						}
 					);
 				}.bind(this.childInstances[i])
