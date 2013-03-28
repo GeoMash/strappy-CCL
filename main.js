@@ -1,6 +1,15 @@
+requirejs.config
+(
+	{
+		// paths
+		// {
+		// 	'strappy.ccl':	
+		// }
+	}
+);
 define
 (
-	'strappy-ccl',
+	'strappy/ccl',
 	[
 		'./CCL',
 		'./trait/Containable',
