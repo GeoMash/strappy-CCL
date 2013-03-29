@@ -24,10 +24,10 @@ $JSKK.Trait.create
 			this.getContainer().css
 			(
 				{
-					transition:				'all 0s linear',
-					'-o-transition':		'all 0s linear',
-					'-moz-transition':		'all 0s linear',
-					'-webkit-transition':	'all 0s linear'
+					transition:				'none',
+					'-o-transition':		'none',
+					'-moz-transition':		'none',
+					'-webkit-transition':	'none'
 				}
 			);
 		}
