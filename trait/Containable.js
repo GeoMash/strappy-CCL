@@ -37,13 +37,13 @@ $JSKK.Trait.create
 			{
 				if (!Object.isNull(this.getState('bodySelector')))
 				{
-					this.getView('Default')	.getContainer()
+					this.getView('Main')	.getContainer()
 											.find(this.getState('bodySelector'))
 											.append(this.getState('html'));
 				}
 				else
 				{
-					this.getView('Default').getContainer().append(this.getState('html'));
+					this.getView('Main').getContainer().append(this.getState('html'));
 				}
 				parent.fireEvent('onChildReady',this.getState('fullRef')+'.html',this);
 			}
@@ -97,8 +97,24 @@ $JSKK.Trait.create
 				child.parentRef		=this.$reflect('name');
 				child.fullRef		=child.parentRef+'.'+child.ref;
 			}
+			var state=Object.clone(child);
+			
+			//Configure it to attach itself to THIS container.
+			state.attachTo='#'+this.getIID();
+			if (!Object.isNull(this.getState('bodySelector')))
+			{
+				state.attachTo+=' '+this.getState('bodySelector');
+			}
+			
+			//Remove the reference to the component prototype.
+			delete state.cmp;
 			//Create an instance of the child component.
-			this.childInstances[i]=parent.newChildComponent(child.cmp,child.ref);
+			this.childInstances[i]=parent.newChildComponent
+			(
+				child.cmp,
+				child.ref,
+				state
+			);
 			
 			/*
 			 Bind observer for child events.
@@ -116,63 +132,42 @@ $JSKK.Trait.create
 				}.bind(this)
 			);
 			
-			//Remove the reference to the component prototype.
-			delete child.cmp;
 			
-			//Configure it to attach itself to THIS container.
-			child.attachTo='#'+this.getIID();
-			if (!Object.isNull(this.getState('bodySelector')))
-			{
-				child.attachTo+=' '+this.getState('bodySelector');
-			}
-			
-			$JSKK.when
+			this.observeOnce
 			(
+				'onReadyState',
 				function()
 				{
-					return Object.isDefined(this._controllers.State);
-				}.bind(this.childInstances[i])
-			).isTrue
-			(
-				function()
-				{
-					this._controllers.State.observeOnce
-					(
-						'onReadyState',
-						function()
+					//Check if all children are ready.
+					if (++this.readyChildren===children.length)
+					{
+						var el		=null,
+							testEl	=null;
+						//Now check if each child is in the correct order.
+						for (var i=0,j=children.length; i<j; i++)
 						{
-							//Check if all children are ready.
-							if (++this.readyChildren===children.length)
+							el=$('#'+this.childInstances[i].getIID());
+							testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
+							//The elements must match otherwise they're in the wrong order.
+							if (el[0]!=testEl[0])
 							{
-								var el		=null,
-									testEl	=null;
-								//Now check if each child is in the correct order.
-								for (var i=0,j=children.length; i<j; i++)
+								//Wrong order - so now we must reorder the elements.
+								var parentEl=$(children[0].appendTo);
+								parentEl.children().remove();
+								for (var k=0,l=children.length; k<l; k++)
 								{
-									el=$('#'+this.childInstances[i].getIID());
-									testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
-									//The elements must match otherwise they're in the wrong order.
-									if (el[0]!=testEl[0])
-									{
-										//Wrong order - so now we must reorder the elements.
-										var parentEl=$(children[0].appendTo);
-										parentEl.children().remove();
-										for (var k=0,l=children.length; k<l; k++)
-										{
-											parentEl.append(children[i]);
-										}
-										break;
-									}
+									parentEl.append(children[i]);
 								}
+								break;
 							}
-							parent.fireEvent('onChildReady',this.getState('fullRef'),this);
 						}
-					);
-				}.bind(this.childInstances[i])
+					}
+					parent.fireEvent('onChildReady',this.getState('fullRef'),this);
+				}.bind(this)
 			);
 					
 			//Configure the component.
-			this.childInstances[i].configure(child);
+			// this.childInstances[i].configure(child);
 		}
 	}
 );
