@@ -25,9 +25,7 @@ define
 		'./component/container/view/Default',
 		'./component/container/store/State',
 		'./component/uploader/Uploader',
-		'./component/uploader/controller/Default',
-		'./component/uploader/controller/State',
-		'./component/uploader/view/Default',
-		'./component/uploader/store/State'
+		'./component/uploader/controller/Main',
+		'./component/uploader/view/Main'
 	]
 );
