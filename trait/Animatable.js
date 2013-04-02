@@ -12,10 +12,10 @@ $JSKK.Trait.create
 			this.getContainer().css
 			(
 				{
-					transition:				'all .2s linear',
-					'-o-transition':		'all .2s linear',
-					'-moz-transition':		'all .2s linear',
-					'-webkit-transition':	'all .2s linear'
+					transition:				'all .25s linear',
+					'-o-transition':		'all .25s linear',
+					'-moz-transition':		'all .25s linear',
+					'-webkit-transition':	'all .25s linear'
 				}
 			);
 		},
