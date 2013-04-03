@@ -2,7 +2,11 @@ $JSKK.Trait.create
 (
 	{
 		$namespace:	'strappy.ccl.trait',
-		$name:		'Containable'
+		$name:		'Containable',
+		$requires:
+		[
+			'strappy.ccl.component.container.Container'
+		]
 	}
 )
 (
@@ -64,7 +68,7 @@ $JSKK.Trait.create
 		},
 		addChild: function(child,i)
 		{
-			var	parent			=this.getParentComponent(),
+			var	parent			=this.cmp(),
 				children		=this.getState('children') || [];
 			if (Object.isUndefined(child.cmp))
 			{
@@ -74,7 +78,7 @@ $JSKK.Trait.create
 				}
 				else
 				{
-					child.cmp='strappy.ccl.Container';
+					child.cmp='strappy.ccl.component.container.Container';
 				}
 			}
 			//Set the parent ref.
@@ -132,12 +136,12 @@ $JSKK.Trait.create
 				}.bind(this)
 			);
 			
-			
+			//TODO: fix this.
 			this.observeOnce
 			(
 				'onReadyState',
 				function()
-				{
+				{console.debug('onReadyState');
 					//Check if all children are ready.
 					if (++this.readyChildren===children.length)
 					{
@@ -161,6 +165,7 @@ $JSKK.Trait.create
 								break;
 							}
 						}
+						this.fireEvent('onAllChildrenReady');
 					}
 					parent.fireEvent('onChildReady',this.getState('fullRef'),this);
 				}.bind(this)

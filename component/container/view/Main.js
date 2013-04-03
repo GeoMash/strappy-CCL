@@ -2,7 +2,7 @@ $JSKK.Class.create
 (
 	{
 		$namespace:	'strappy.ccl.component.container.view',
-		$name:		'Default',
+		$name:		'Main',
 		$extends:	'strappy.mvc.View'
 	}
 )
@@ -16,13 +16,13 @@ $JSKK.Class.create
 		// appliedWrapper:	false,
 		onReady: function()
 		{
-			this.getContainer().addClass(this.getConfig('cls'));
-			this.getContainer().addClass(this.getConfig('layout'));
-			if (this.getConfig('style'))
+			this.getContainer().addClass(this.getState('cls'));
+			this.getContainer().addClass(this.getState('layout'));
+			if (this.getState('style'))
 			{
-				this.getContainer().css(this.getConfig('style'));
+				this.getContainer().css(this.getState('style'));
 			}
-			// if (this.getConfig('relativeWrapper'))
+			// if (this.getState('relativeWrapper'))
 			// {
 			// 	this.getContainer().append($('<div class="relative-wrapper" style="display:none;"></div>'));
 			// 	this.appliedWrapper=true;
@@ -42,7 +42,7 @@ $JSKK.Class.create
 		},
 		// getContainer: function()
 		// {
-		// 	if (!this.appliedWrapper || !this.getConfig('relativeWrapper'))
+		// 	if (!this.appliedWrapper || !this.getState('relativeWrapper'))
 		// 	{
 		// 		return $('#'+this.getIID());
 		// 	}
@@ -55,7 +55,7 @@ $JSKK.Class.create
 		{
 			return '#'+this.getIID();
 			
-			// if (!this.appliedWrapper || !this.getConfig('relativeWrapper'))
+			// if (!this.appliedWrapper || !this.getState('relativeWrapper'))
 			// {
 			// 	return '#'+this.getIID();
 			// }

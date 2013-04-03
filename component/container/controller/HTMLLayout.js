@@ -9,13 +9,12 @@ $JSKK.Class.create
 (
 	{},
 	{
-		init: function()
-		{
-			this.init.$parent();
-			if (this.getConfig('layout') === 'html')
+		onAfterCmpInit: function()
+		{console.debug(this.getState('layout'));
+			if (this.getState('layout') === 'html')
 			{
-				var view = this.getView('Default');
-				view.getContainer().append(this.getConfig('html'));
+				var view = this.getView('Main');
+				view.getContainer().append(this.getState('html'));
 				view.show();
 			}
 		},

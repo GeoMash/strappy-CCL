@@ -13,34 +13,29 @@ $JSKK.Class.create
 (
 	{},
 	{
-		init: function()
+		onAfterCmpInit: function()
 		{
-			this.init.$parent();
-			this.getController('State')	.observe('onReadyState',this.onReadyState.bind(this));
-		},
-		onReadyState: function()
-		{
-			if (this.getConfig('layout')=='auto')
+			if (this.getState('layout')=='auto')
 			{
-				if (this.getConfig('autoShow'))
+				if (this.getState('autoShow'))
 				{
-					this.getView('Default').getContainer().show();
+					this.getView('Main').getContainer().show();
 				}
 				this.initChildren();
 			}
 		},
 		onSignalShow: function()
 		{
-			this.getView('Default').getContainer().show();
+			this.getView('Main').getContainer().show();
 		},
 		onSignalHide: function()
 		{
-			this.getView('Default').getContainer().hide();
+			this.getView('Main').getContainer().hide();
 		}
 		// onSignalShow: function()
 		// {
-		// 	var view=this.getView('Default');
-		// 	if (this.getConfig('relativeWrapper'))
+		// 	var view=this.getView('Main');
+		// 	if (this.getState('relativeWrapper'))
 		// 	{
 		// 		view.getContainer().parent().show();
 		// 	}
@@ -48,8 +43,8 @@ $JSKK.Class.create
 		// },
 		// onSignalHide: function()
 		// {
-		// 	var view=this.getView('Default');
-		// 	if (this.getConfig('relativeWrapper'))
+		// 	var view=this.getView('Main');
+		// 	if (this.getState('relativeWrapper'))
 		// 	{
 		// 		view.getContainer().parent().hide();
 		// 	}

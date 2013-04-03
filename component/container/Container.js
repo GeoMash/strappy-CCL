@@ -1,7 +1,7 @@
 $JSKK.Class.create
 (
 	{
-		$namespace:	'strappy.ccl.component',
+		$namespace:	'strappy.ccl.component.container',
 		$name:		'Container',
 		$extends:	'strappy.Component'
 	}
@@ -13,28 +13,32 @@ $JSKK.Class.create
 		{
 			onChildReady:	true
 		},
-		config:
+		state:
 		{
-			attachTo:		null,
-			ref:			null,
-			cmp:			null,
-			signalKey:		null,
-			cls:			null,
-			style:			null,
-			autoShow:		true,
-			children:		null,
-			/**
-			 * The type of layout for the container.
-			 * 
-			 * Supported layout types:
-			 * 
-			 * * Auto
-			 * * Card
-			 * * HTML
-			 * 
-			 * @cfg layout {String}
-			 */
-			layout:			'auto'
+			'private':
+			{
+				attachTo:		null,
+				ref:			null,
+				cmp:			null,
+				signalKey:		null,
+				cls:			null,
+				style:			null,
+				autoShow:		true,
+				children:		null,
+				/**
+				 * The type of layout for the container.
+				 * 
+				 * Supported layout types:
+				 * 
+				 * * Auto
+				 * * Card
+				 * * HTML
+				 * 
+				 * @cfg layout {String}
+				 */
+				layout:			'auto',
+				activeCard:		null
+			}
 		},
 		components:
 		{
@@ -46,10 +50,11 @@ $JSKK.Class.create
 		],
 		views:
 		[
-			'Default'
+			'Main'
 		],
 		controllers:
 		[
+			'Main',
 			'AutoLayout',
 			'CardLayout',
 			'HTMLLayout'

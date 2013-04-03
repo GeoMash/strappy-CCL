@@ -62,6 +62,7 @@ $JSKK.Trait.create
 						height:	newHeight
 					}
 				);
+				this.fireEvent('onResizing');
 			}
 		},
 		onResizeEnd: function()

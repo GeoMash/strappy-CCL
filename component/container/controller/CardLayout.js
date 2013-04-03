@@ -10,14 +10,9 @@ $JSKK.Class.create
 	{},
 	{
 		cards:{},
-		init: function()
+		onAfterCmpInit: function()
 		{
-			this.init.$parent();
-			this.getController('State')	.observe('onReadyState',this.onReadyState.bind(this));
-		},
-		onReadyState: function()
-		{
-			if (this.getConfig('layout')=='card')
+			if (this.getState('layout')=='card')
 			{
 				//Register for card change signal.
 				this.registerSignals
@@ -30,19 +25,19 @@ $JSKK.Class.create
 							filter:
 							{
 								destination:	'container',
-								key:			this.getConfig('signalKey')
+								key:			this.getState('signalKey')
 							}
 						}
 					}
 				);
 				//Show the component if autoShow is set to true.
-				if (this.getConfig('autoShow'))
+				if (this.getState('autoShow'))
 				{
-					this.getView('Default').getContainer().show();
+					this.getView('Main').getContainer().show();
 				}
 				var	parent			=this.getParentComponent(),
-					children		=this.getConfig('children'),
-					activeCard		=this.getStore('State').get('activeCard'),
+					children		=this.getState('children'),
+					activeCard		=this.getState('activeCard'),
 					thisChildCmp	=null;
 				if (!Object.isNull(children))
 				{
@@ -57,14 +52,14 @@ $JSKK.Class.create
 							children[i].cmp='strappy.ccl.component.Container';
 						}
 						//Set the parent ref.
-						if (this.getConfig('ref') && Object.isDefined(children[i].ref))
+						if (this.getState('ref') && Object.isDefined(children[i].ref))
 						{
 							var parentRef='';
-							if (this.getConfig('parentRef'))
+							if (this.getState('parentRef'))
 							{
-								parentRef=this.getConfig('parentRef')+'.';
+								parentRef=this.getState('parentRef')+'.';
 							}
-							children[i].parentRef	=parentRef+this.getConfig('ref');
+							children[i].parentRef	=parentRef+this.getState('ref');
 							children[i].fullRef		=children[i].parentRef+'.'+children[i].ref;
 						}
 						//Create an instance of the child component.
@@ -122,12 +117,12 @@ $JSKK.Class.create
 			(
 				function()
 				{
-					this._controllers.State.observeOnce
+					this.observeOnce
 					(
 						'onReadyState',
 						function()
 						{
-							parent.fireEvent('onChildReady',this.getConfig('fullRef'),this);
+							parent.fireEvent('onChildReady',this.getState('fullRef'),this);
 						}
 					);
 				}.bind(childCmp)
@@ -171,7 +166,7 @@ $JSKK.Class.create
 				throw new Error('Unable to show card. Invalid card refernece "'+ref+'".');
 			}
 			
-			var	children	=this.getConfig('children'),
+			var	children	=this.getState('children'),
 				components	=this.getParentComponent().components;
 			for (var i=0,j=children.length; i<j; i++)
 			{
@@ -191,7 +186,7 @@ $JSKK.Class.create
 								}.bind(this)
 							);
 						if (Object.isUndefined(children[i].config))children[i].config={};
-						children[i].config.attachTo=this.getView('Default').getContainerSelector();
+						children[i].config.attachTo=this.getView('Main').getContainerSelector();
 						queue.add
 						(
 							children[i].ref,
@@ -200,7 +195,7 @@ $JSKK.Class.create
 						);
 						queue.execute();
 					}
-					this.getStore('State').set('activeCard',ref);
+					this.setState('activeCard',ref);
 				}
 				else if (Object.isDefined(components[children[i].ref]))
 				{

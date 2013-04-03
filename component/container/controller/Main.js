@@ -2,19 +2,18 @@ $JSKK.Class.create
 (
 	{
 		$namespace:	'strappy.ccl.component.container.controller',
-		$name:		'State',
-		$extends:	'strappy.mvc.stateful.Controller'
+		$name:		'Main',
+		$extends:	'strappy.mvc.Controller'
 	}
 )
 (
 	{},
 	{
 		layouts:	['auto','html','card'],
-		init: function()
+		onAfterCmpInit: function()
 		{
-			this.init.$parent();
-			this.getView('Default')	.observe('onReady',	this.onViewReady.bind(this));
-			this.stateStore.set('activeCard',this.getConfig('activeCard'));
+			this.cmp().setReady();
+			// this.getView('Main').observe('onReady',this.onViewReady.bind(this));
 		},
 		onBeforeChange: function(state,key,value)
 		{
@@ -36,7 +35,7 @@ $JSKK.Class.create
 		},
 		hasValidLayout: function()
 		{
-			return this.layouts.inArray(this.getConfig('layout'));
+			return this.layouts.inArray(this.getState('layout'));
 		}
 	}
 );
