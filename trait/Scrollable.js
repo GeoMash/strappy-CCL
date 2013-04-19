@@ -31,6 +31,7 @@ $JSKK.Trait.create
 					}
 				}
 			}
+			return this;
 		}
 	}
 );
