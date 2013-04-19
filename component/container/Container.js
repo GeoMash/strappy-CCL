@@ -24,6 +24,7 @@ $JSKK.Class.create
 				cls:			null,
 				style:			null,
 				autoShow:		true,
+				scrollable:		true,
 				children:		null,
 				/**
 				 * The type of layout for the container.

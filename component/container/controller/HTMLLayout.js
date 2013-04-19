@@ -10,7 +10,7 @@ $JSKK.Class.create
 	{},
 	{
 		onAfterCmpInit: function()
-		{console.debug(this.getState('layout'));
+		{
 			if (this.getState('layout') === 'html')
 			{
 				var view = this.getView('Main');

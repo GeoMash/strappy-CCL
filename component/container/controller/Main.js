@@ -12,7 +12,15 @@ $JSKK.Class.create
 		layouts:	['auto','html','card'],
 		onAfterCmpInit: function()
 		{
-			this.cmp().setReady();
+			this.getView('Main').observe
+			(
+				'onReady',
+				function()
+				{
+					this.cmp().setReady();
+				}.bind(this)
+			);
+			
 			// this.getView('Main').observe('onReady',this.onViewReady.bind(this));
 		},
 		onBeforeChange: function(state,key,value)
