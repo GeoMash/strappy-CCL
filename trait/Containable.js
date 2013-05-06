@@ -147,7 +147,7 @@ $JSKK.Trait.create
 							this.fireEvent('onAllChildrenReady');
 						}
 						
-						parent.fireEvent('onChildReady',this.getState('fullRef'),this);
+						parent.fireEvent('onChildReady',child.fullRef,child.cmp);
 					}.bind(this),
 					onChildReady: function(ref,child)
 					{
