@@ -91,7 +91,7 @@ $JSKK.Trait.create
 				}
 				else
 				{
-					parentRef=this.$reflect('name');
+					parentRef=this.$reflect('name')+'.';
 				}
 				child.parentRef		=parentRef+this.getState('ref');
 				child.fullRef		=child.parentRef+'.'+child.ref;
@@ -117,62 +117,46 @@ $JSKK.Trait.create
 			(
 				child.cmp,
 				child.ref,
-				state
-			);
-			
-			/*
-			 Bind observer for child events.
-			 This will recursively redirect all child onChildReady events
-			 up to the parent onChildReady observer.
-			 */
-			this.childInstances[i].observe
-			(
-				'onChildReady',
-				function(ref,child)
+				state,
 				{
-					var args=$JSKK.toArray(arguments);
-					args.unshift('onChildReady');
-					parent.fireEvent.apply(parent,args);
-				}.bind(this)
-			);
-			
-			//TODO: fix this.
-			this.observeOnce
-			(
-				'onReadyState',
-				function()
-				{console.debug('onReadyState');
-					//Check if all children are ready.
-					if (++this.readyChildren===children.length)
+					onReadyState: function()
 					{
-						var el		=null,
-							testEl	=null;
-						//Now check if each child is in the correct order.
-						for (var i=0,j=children.length; i<j; i++)
+						//Check if all children are ready.
+						if (++this.readyChildren===children.length)
 						{
-							el=$('#'+this.childInstances[i].getIID());
-							testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
-							//The elements must match otherwise they're in the wrong order.
-							if (el[0]!=testEl[0])
+							var el		=null,
+								testEl	=null;
+							//Now check if each child is in the correct order.
+							for (var i=0,j=children.length; i<j; i++)
 							{
-								//Wrong order - so now we must reorder the elements.
-								var parentEl=$(children[0].appendTo);
-								parentEl.children().remove();
-								for (var k=0,l=children.length; k<l; k++)
+								el=$('#'+this.childInstances[i].getIID());
+								testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
+								//The elements must match otherwise they're in the wrong order.
+								if (el[0]!=testEl[0])
 								{
-									parentEl.append(children[i]);
+									//Wrong order - so now we must reorder the elements.
+									var parentEl=$(children[0].appendTo);
+									parentEl.children().remove();
+									for (var k=0,l=children.length; k<l; k++)
+									{
+										parentEl.append(children[i]);
+									}
+									break;
 								}
-								break;
 							}
+							this.fireEvent('onAllChildrenReady');
 						}
-						this.fireEvent('onAllChildrenReady');
-					}
-					parent.fireEvent('onChildReady',this.getState('fullRef'),this);
-				}.bind(this)
+						
+						parent.fireEvent('onChildReady',this.getState('fullRef'),this);
+					}.bind(this),
+					onChildReady: function(ref,child)
+					{
+						var args=$JSKK.toArray(arguments);
+						args.unshift('onChildReady');
+						parent.fireEvent.apply(parent,args);
+					}.bind(this)
+				}
 			);
-					
-			//Configure the component.
-			// this.childInstances[i].configure(child);
 		}
 	}
 );
