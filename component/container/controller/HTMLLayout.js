@@ -13,10 +13,14 @@ $JSKK.Class.create
 		{
 			if (this.getState('layout') === 'html')
 			{
-				var view = this.getView('Main');
-				view.getContainer().append(this.getState('html'));
-				view.show();
+				this.cmp().observe('onStateChange',this.redraw.bind(this));
+				this.redraw();
+				this.getView('Main').show();
 			}
+		},
+		redraw: function()
+		{
+			this.getView('Main').getContainer().html('').append(this.getState('html'));
 		},
 		onChangeCard: function(signal)
 		{
