@@ -9,7 +9,6 @@ $JSKK.Trait.create
 	{
 		hoverSetUp: function(el, settings)
 		{
-			//console.log($.extend({}, this.hoverSettings, settings))
 			$(el).hoverIntent
 			(
 				$.extend({}, this.hoverSettings(), settings)
@@ -42,7 +41,7 @@ $JSKK.Trait.create
 			} 
 			else 
 			{
-				console.log('either the menu or the parent does not exist');
+				console.log('the parentContainer does not exist');
 			}
 		},
 		removeHoverMenu: function()
@@ -65,7 +64,7 @@ $JSKK.Trait.create
 			}
 			else 
 			{
-				console.log('either the menu or the parent does not exist');
+				console.log('the parentContainer does not exist');
 			}
 		},
 		getHoverMenu: function(el)
