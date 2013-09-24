@@ -73,4 +73,3 @@ $JSKK.Trait.create
 		}
 	}
 );
-
