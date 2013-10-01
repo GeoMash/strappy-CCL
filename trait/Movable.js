@@ -24,6 +24,10 @@ $JSKK.Trait.create
 		},
 		onMoveUpdate: function(event)
 		{
+			if (Object.isFunction(this.getView('Main').disableAnimations))
+			{
+				this.getView('Main').disableAnimations();
+			}
 			if (this.moving)
 			{
 				var	view		=this.getView('Main'),
@@ -63,6 +67,22 @@ $JSKK.Trait.create
 					this.getView('Main').enableAnimations();
 				}
 				$('body').removeClass('is-dragging');
+
+				var container=this.getView('Main').getContainer();
+				this.setState
+				(
+					'offset',
+					[
+						container.css('top'),
+						container.css('right'),
+						container.css('bottom'),
+						container.css('left')
+					]
+				);
+				if (Object.isFunction(this.getView('Main').enableAnimations))
+				{
+					this.getView('Main').enableAnimations();
+				}
 			}
 		}
 	}
