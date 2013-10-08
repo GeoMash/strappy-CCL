@@ -53,13 +53,17 @@ $JSKK.Class.create
 					silverlight_xap_url:	this.getState('upload_silverlight_xap_url'),
 					filters:				this.getState('upload_filters') || false,
 					multi_selection:		this.getState('upload_multi_selection'),
-					max_file_count: 		1
+					max_file_count: 		1,
+					filters : [
+						{title : "CSV files", extensions : "csv"},
+						{title : "KML files", extensions : "kml"}
+					]
 				}
 			);
 			this.uploader.bind('Init',				this.onInit.bind(this));
 			this.uploader.bind('FilesAdded',		this.onFilesAdded.bind(this));
 			this.uploader.bind('UploadProgress',	this.onUploadProgress.bind(this));
-			this.uploader.bind('Error',				this.onError.bind(this));
+			this.uploader.bind('Error',				this.onFileError.bind(this));
 			this.uploader.bind('FileUploaded',		this.onFileUploaded.bind(this));
 
 			// Active and non-active states
@@ -86,9 +90,9 @@ $JSKK.Class.create
 		{
 			this.fireEvent('onUploadProgress',this,uploader,params);
 		},
-		onError: function(uploader,err)
+		onFileError: function(uploader,err)
 		{
-			this.fireEvent('onError',this,uploader,err);
+			this.fireEvent('onFileError',this,uploader,err);
 		},
 		onFileUploaded: function(uploader,file)
 		{
