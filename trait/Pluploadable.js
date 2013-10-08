@@ -51,7 +51,9 @@ $JSKK.Class.create
 					url:					this.getState('upload_url'),
 					flash_swf_url:			this.getState('upload_flash_swf_url'),
 					silverlight_xap_url:	this.getState('upload_silverlight_xap_url'),
-					filters:				this.getState('upload_filters') || false
+					filters:				this.getState('upload_filters') || false,
+					multi_selection:		this.getState('upload_multi_selection'),
+					max_file_count: 		1
 				}
 			);
 			this.uploader.bind('Init',				this.onInit.bind(this));
