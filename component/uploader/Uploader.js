@@ -22,6 +22,8 @@ $JSKK.Class.create
 				upload_url:						'/',
 				upload_flash_swf_url:			'/lib/plupload/plupload.flash.swf',
 				upload_silverlight_xap_url:		'/lib/plupload/plupload.silverlight.xap',
+				upload_container: 				null,
+				upload_drop_element: 			null, 
 				// upload_filters:				[]
 				// {title : "Image files", extensions : "jpg,gif,png"},
 				// {title : "Zip files", extensions : "zip"}

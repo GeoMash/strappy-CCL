@@ -46,6 +46,7 @@ $JSKK.Class.create
 					runtimes:				this.getState('upload_runtimes'),
 					browse_button:			this.getState('upload_browse_button'),
 					container:				this.getState('upload_container'),
+					drop_element:			this.getState('upload_drop_element'),
 					max_file_size:			this.getState('upload_max_file_size'),
 					url:					this.getState('upload_url'),
 					flash_swf_url:			this.getState('upload_flash_swf_url'),
@@ -58,6 +59,12 @@ $JSKK.Class.create
 			this.uploader.bind('UploadProgress',	this.onUploadProgress.bind(this));
 			this.uploader.bind('Error',				this.onError.bind(this));
 			this.uploader.bind('FileUploaded',		this.onFileUploaded.bind(this));
+
+			// Active and non-active states
+			var dropArea = $('#'+this.uploader.settings.drop_element);
+			dropArea.bind('dragover',						this.onFileDragOver.bind(this));
+			dropArea.bind('dragexit dragleave drop',		this.onDragOffDrop.bind(this));
+			
 			
 			this.uploader.init();
 		},
@@ -84,6 +91,15 @@ $JSKK.Class.create
 		onFileUploaded: function(uploader,file)
 		{
 			this.fireEvent('onFileUploaded',this,uploader,file);
+		},
+		onFileDragOver: function(uploader,file)
+		{
+			this.fireEvent('onFileDragOver',this,uploader,file);
+		},
+		onDragOffDrop: function(uploader,file)
+		{
+			this.fireEvent('onDragOffDrop',this,uploader,file);
 		}
+
 	}
 );
