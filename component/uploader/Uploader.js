@@ -24,10 +24,8 @@ $JSKK.Class.create
 				upload_silverlight_xap_url:		'/lib/plupload/plupload.silverlight.xap',
 				upload_container: 				null,
 				upload_drop_element: 			null, 
-				upload_multi_selection: 		true
-				// upload_filters:				[]
-				// {title : "Image files", extensions : "jpg,gif,png"},
-				// {title : "Zip files", extensions : "zip"}
+				upload_multi_selection: 		true,
+				upload_filters:					null
 			}
 		},
 		components:

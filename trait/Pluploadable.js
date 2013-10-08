@@ -53,11 +53,7 @@ $JSKK.Class.create
 					silverlight_xap_url:	this.getState('upload_silverlight_xap_url'),
 					filters:				this.getState('upload_filters') || false,
 					multi_selection:		this.getState('upload_multi_selection'),
-					max_file_count: 		1,
-					filters : [
-						{title : "CSV files", extensions : "csv"},
-						{title : "KML files", extensions : "kml"}
-					]
+					max_file_count: 		1
 				}
 			);
 			this.uploader.bind('Init',				this.onInit.bind(this));
