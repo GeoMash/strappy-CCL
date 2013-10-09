@@ -57,17 +57,19 @@ $JSKK.Class.create
 				}
 			);
 			this.uploader.bind('Init',				this.onInit.bind(this));
-			this.uploader.init();
+			// Active and non-active states
+			var dropArea = $('#'+this.uploader.settings.drop_element);
+			dropArea.bind('dragover',						this.onFileDragOver.bind(this));
+			dropArea.bind('dragexit dragleave drop',		this.onDragOffDrop.bind(this));
 			
+			this.uploader.init();
+
 			this.uploader.bind('FilesAdded',		this.onFilesAdded.bind(this));
 			this.uploader.bind('UploadProgress',	this.onUploadProgress.bind(this));
 			this.uploader.bind('Error',				this.onFileError.bind(this));
 			this.uploader.bind('FileUploaded',		this.onFileUploaded.bind(this));
 
-			// Active and non-active states
-			var dropArea = $('#'+this.uploader.settings.drop_element);
-			dropArea.bind('dragover',						this.onFileDragOver.bind(this));
-			dropArea.bind('dragexit dragleave drop',		this.onDragOffDrop.bind(this));
+			
 			
 			
 			
