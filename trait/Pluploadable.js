@@ -57,6 +57,8 @@ $JSKK.Class.create
 				}
 			);
 			this.uploader.bind('Init',				this.onInit.bind(this));
+			this.uploader.init();
+			
 			this.uploader.bind('FilesAdded',		this.onFilesAdded.bind(this));
 			this.uploader.bind('UploadProgress',	this.onUploadProgress.bind(this));
 			this.uploader.bind('Error',				this.onFileError.bind(this));
@@ -68,7 +70,7 @@ $JSKK.Class.create
 			dropArea.bind('dragexit dragleave drop',		this.onDragOffDrop.bind(this));
 			
 			
-			this.uploader.init();
+			
 		},
 		uploadFiles: function()
 		{
