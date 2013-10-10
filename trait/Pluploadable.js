@@ -70,9 +70,6 @@ $JSKK.Class.create
 			this.uploader.bind('FileUploaded',		this.onFileUploaded.bind(this));
 
 			
-			
-			
-			
 		},
 		uploadFiles: function()
 		{
