@@ -86,9 +86,9 @@ $JSKK.Class.create
 		{
 			this.fireEvent('onFilesAdded',this,uploader,files);
 		},
-		onUploadProgress: function(uploader,file,params)
+		onUploadProgress: function(uploader,file)
 		{
-			this.fireEvent('onUploadProgress',this,uploader,params);
+			this.fireEvent('onUploadProgress',this,uploader,file);
 		},
 		onFileError: function(uploader,err)
 		{
