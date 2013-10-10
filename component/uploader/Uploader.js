@@ -17,7 +17,7 @@ $JSKK.Class.create
 				upload_runtimes:				'html5,flash,silverlight,gears,browserplus',
 				upload_container:				null,//'plupload-container',
 				upload_browse_button:			null,
-				upload_max_file_size:			'50mb',
+				upload_max_file_size:			'500mb',
 				// upload_resize:					{width : 320, height : 240, quality : 90},
 				upload_url:						'/',
 				upload_flash_swf_url:			'/lib/plupload/plupload.flash.swf',
