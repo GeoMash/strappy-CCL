@@ -32,7 +32,7 @@ $JSKK.Class.create
 		{
 			var view=this.getView('Main');
 			view.syncView();
-			view.show();
+//			view.show();
 			if (Object.isNull(this.getState('upload_container')))
 			{
 				this.setState('upload_container',this.getIID());
