@@ -13,7 +13,7 @@ $JSKK.Class.create
 		{
 			
 		},
-		onReady: function()
+		onAfterCmpInit: function()
 		{
 			
 			
