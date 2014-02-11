@@ -20,6 +20,7 @@ $JSKK.Trait.create
 				x:	event.clientX,
 				y:	event.clientY
 			};
+			this.fireEvent('onResizeStart');
 		},
 		onResizeUpdate: function(event)
 		{
@@ -77,6 +78,7 @@ $JSKK.Trait.create
 				}
 				$('body').removeClass('is-resizing');
 			}
+			this.fireEvent('onResizeEnd');
 		},
 	}
 );
