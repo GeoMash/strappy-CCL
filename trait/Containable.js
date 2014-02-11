@@ -41,11 +41,11 @@ $JSKK.Trait.create
 				{
 					this.getView('Main')	.getContainer()
 											.find(this.getState('bodySelector'))
-											.append(this.getState('html'));
+											.html(this.getState('html'));
 				}
 				else
 				{
-					this.getView('Main').getContainer().append(this.getState('html'));
+					this.getView('Main').getContainer().html(this.getState('html'));
 				}
 				parent.fireEvent('onChildReady',this.getState('fullRef')+'.html',this);
 			}
