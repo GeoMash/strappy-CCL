@@ -77,8 +77,8 @@ $JSKK.Trait.create
 					this.getView('Main').enableAnimations();
 				}
 				$('body').removeClass('is-resizing');
+				this.fireEvent('onResizeEnd');
 			}
-			this.fireEvent('onResizeEnd');
 		},
 	}
 );
