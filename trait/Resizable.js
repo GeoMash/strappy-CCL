@@ -70,8 +70,14 @@ $JSKK.Trait.create
 		{
 			if (this.resizing)
 			{
+				var	view		=this.getView('Main'),
+					container	=view.getContainer(),
+					width		=container.width(),
+					height		=container.height();
 				this.resizing		=false;
 				this.resizeMatrix	={x:0,y:0};
+				this.setState('width',width);
+				this.setState('height',height);
 				if (Object.isFunction(this.getView('Main').enableAnimations))
 				{
 					this.getView('Main').enableAnimations();
