@@ -9,6 +9,20 @@ $JSKK.Trait.create
 	{
 		initScrollable: function(event)
 		{
+			$('.jspscroll').each
+			(
+				function(index,el)
+				{
+					var pane=$(el).find('.jspPane');
+					if (pane.length)
+					{
+						if (!pane.height())
+						{
+							pane.height(pane.parent().height());
+						}
+					}
+				}
+			);
 			$('.jspscroll').jScrollPane({horizontalDragMaxWidth: 0, verticalGutter: 3});
 	
 			// fix for vertical guttering which fails miserably
