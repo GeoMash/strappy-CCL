@@ -1,0 +1,22 @@
+{
+	"name": "geomash/strappy",
+	"description": "JavaScript component framework",
+	"keywords": ["javascript", "", "framework"],
+	"type": "javascript-library",
+	"homepage": "https://github.com/SpinifexGroup/strappy",
+	"license": "private",
+	"authors":
+	[
+		{
+			"name": "GeoMash",
+			"homepage": "http://www.geomash.com/"
+		}
+	],
+	"repositories":
+	[
+		{
+			"type": "git",
+			"url":  "http://git.geomash.com/open-source/composer-installers.git"
+		}
+	]
+}
