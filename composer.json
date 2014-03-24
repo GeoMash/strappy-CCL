@@ -1,9 +1,9 @@
 {
-	"name": "geomash/strappy",
-	"description": "JavaScript component framework",
-	"keywords": ["javascript", "", "framework"],
-	"type": "strappy-ccl",
-	"homepage": "https://github.com/SpinifexGroup/strappy",
+	"name": "geomash/strappy-ccl",
+	"description": "Common Component Library for Strappy",
+	"keywords": ["javascript", "framework", "component","strappy","library"],
+	"type": "strappy",
+	"homepage": "https://github.com/melechi/strappy-CCL",
 	"license": "private",
 	"authors":
 	[
