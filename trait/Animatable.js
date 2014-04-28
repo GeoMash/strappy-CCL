@@ -1,3 +1,7 @@
+/**
+ * 
+ * @class strappy.ccl.trait.Animatable
+ */
 $JSKK.Trait.create
 (
 	{

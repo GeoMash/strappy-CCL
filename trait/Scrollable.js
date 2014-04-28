@@ -1,3 +1,7 @@
+/**
+ * 
+ * @class strappy.ccl.trait.Scrollable
+ */
 $JSKK.Trait.create
 (
 	{

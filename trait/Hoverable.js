@@ -1,3 +1,7 @@
+/**
+ * 
+ * @class strappy.ccl.trait.Hoverable
+ */
 $JSKK.Trait.create
 (
 	{

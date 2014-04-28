@@ -1,3 +1,15 @@
+/**
+ * 
+ * Implement the following config options in the component
+ * using this trait.
+	children:			null,					//array
+	html:				null,					//string
+	bodySelector:		null,					//string
+	defaultChildCmp:	'strappy.ccl.Container'	//string
+ 
+ * @class strappy.ccl.trait.Containable
+ * @requires strappy.ccl.component.container.Container
+ */
 $JSKK.Trait.create
 (
 	{
@@ -12,21 +24,9 @@ $JSKK.Trait.create
 (
 	{
 		/**
-		 * Implement the following config options in the component
-		 * using this trait.
-		config:
-		{
-			children:			null,					//array
-			html:				null,					//string
-			bodySelector:		null,					//string
-			defaultChildCmp:	'strappy.ccl.Container'	//string
-		},
-		 */
-		
-		/**
 		 * Iterates over the children config and inits them into
 		 * this components containing div.
-		 * @return {Void}
+		 * @return {void}
 		 */
 		initChildren: function()
 		{

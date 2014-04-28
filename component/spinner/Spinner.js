@@ -26,7 +26,7 @@ $JSKK.Class.create
 		 * @property {Number} [state.private.precision]				Number of decimal places to display and increment and decrement
 		 * @property {Boolean} [state.private.loop]					Whether to loop the spinner when it reaches the minumum or maxumum values.
 		 * Must have a minValue and maxValue values set for looping to work.
-		 * @todo implement for useNumeric == false
+		 * //TODO: implement for useNumeric == false
 		 * 
 		 * @property {Boolean} [state.private.useNumeric]			Whether to use straight up numbers (subject to precision config) e.g. -1, 0, 1, 2. If false the altValues config array should be set
 		 * @property {String} [state.private.altValues]				If useNumeric config is set to false this array must (well not must but nothing good will happen) be populated with the alternate values needed, e.g. 'AM', 'PM'

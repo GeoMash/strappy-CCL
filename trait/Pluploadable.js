@@ -1,3 +1,8 @@
+/**
+ * 
+ * @class strappy.ccl.trait.Pluploadable
+ * @uses $JSKK.trait.Observable
+ */
 $JSKK.Class.create
 (
 	{
