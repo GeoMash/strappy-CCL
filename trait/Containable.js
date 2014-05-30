@@ -34,6 +34,7 @@ $JSKK.Trait.create
 			this.readyChildren			=0;
 			var	parent			=this.getParentComponent(),
 				children		=this.getState('children');
+			
 			//If HTML has been specified, ignore children.
 			if (Object.isString(this.getState('html')))
 			{
@@ -117,24 +118,124 @@ $JSKK.Trait.create
 				{
 					var el		=null,
 						testEl	=null;
-					//Now check if each child is in the correct order.
-					for (var i=0,j=children.length; i<j; i++)
+					/*
+					 * Now check if each child is in the correct order.
+					 * This depends on what layout is being used.
+					 * 
+					 * Currently the reordering supports the following layouts:
+					 * * Auto
+					 * * Border
+					 */
+					switch (this.getState('layout'))
 					{
-						el=$('#'+this.childInstances[i].getIID());
-						testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
-						//The elements must match otherwise they're in the wrong order.
-						if (el[0]!=testEl[0])
+						case 'border':
 						{
-							//Wrong order - so now we must reorder the elements.
-							var parentEl=$(children[0].appendTo);
-							parentEl.children().remove();
-							for (var k=0,l=children.length; k<l; k++)
+							var	usedRegions	=[],
+								parentEl	=$(this.childInstances[0].getState('attachTo')),
+								order		=[];
+							
+							for (var i=0,j=this.childInstances.length; i<j; i++)
 							{
-								parentEl.append(children[i]);
+								if (Object.isDefined(this.childInstances[i].getState('region')))
+								{
+									if (!usedRegions.inArray(this.childInstances[i].getState('region')))
+									{
+										usedRegions.push(this.childInstances[i].getState('region'));
+										el=$('#'+this.childInstances[i].getIID());
+										switch (this.childInstances[i].getState('region'))
+										{
+											case 'north':	order[0]=el;	break;
+											case 'east':
+											{
+												order[1]=el;
+												el.css('width',this.childInstances[i].getState('width') || '20%');
+												el.css('height',this.childInstances[i].getState('height') || '100%');
+												break;
+											}
+											case 'west':
+											{
+												order[2]=el;
+												el.css('width',this.childInstances[i].getState('width') || '20%');
+												el.css('height',this.childInstances[i].getState('height') || '100%');
+												break;
+											}
+											case 'center':	order[3]=el;	break;
+											case 'south':	order[4]=el;	break;
+											default:
+											{
+												console.trace();
+												throw new Error('Invalid region "'+this.childInstances[i].getState('region')+'".');
+											}
+										}
+										el.addClass('layout-border');
+										el.addClass(this.childInstances[i].getState('region'));
+									}
+									else
+									{
+										console.trace();
+										throw new Error('Region was already used by another child component.');
+									}
+								}
+								else
+								{
+									console.trace();
+									throw new Error('Region was not defined on child compon	`ent.');
+								}
 							}
+							console.debug(order);
+							parentEl.children().detach();
+							parentEl.append(order);
 							break;
 						}
+						case 'column':
+						{
+							var order		=[],
+								parentEl	=$(this.childInstances[0].getState('attachTo')),
+								width		=null;
+							for (var i=0,j=this.childInstances.length; i<j; i++)
+							{
+								el		=$('#'+this.childInstances[i].getIID());
+								width	=this.childInstances[i].getState('colWidth');
+								order.push(el);
+								console.debug('colWidth',width,String(width).indexOf('.'));
+								if (String(width).indexOf('.')!==0)
+								{
+									el.css('width',(width*100)+'%');
+								}
+								else
+								{
+									el.css('width',width);
+								}
+								el.css('height',this.childInstances[i].getState('height') || '100%');
+								el.addClass('layout-column');
+							}
+							parentEl.children().detach();
+							parentEl.append(order);
+							break;
+						}
+						case 'auto':
+						default:
+						{
+							for (var i=0,j=children.length; i<j; i++)
+							{
+								el=$('#'+this.childInstances[i].getIID());
+								testEl=$(':nth-child('+(i+1)+')',children[i].attachTo);
+								//The elements must match otherwise they're in the wrong order.
+								if (el[0]!=testEl[0])
+								{
+									//Wrong order - so now we must reorder the elements.
+									var parentEl=$(children[0].appendTo);
+									parentEl.children().remove();
+									for (var k=0,l=children.length; k<l; k++)
+									{
+										parentEl.append(children[i]);
+									}
+									break;
+								}
+							}
+						}
 					}
+					
 					this.fireEvent('onAllChildrenReady');
 				}
 				parent.fireEvent('onChildReady',child.fullRef,thisChildCmp);
