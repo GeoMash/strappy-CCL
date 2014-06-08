@@ -22,7 +22,6 @@ $JSKK.Trait.create
 			for (var i=0,j=parts.length; i<j; i++)
 			{
 				cmp=cmp.getCmp(parts[i]);
-				console.debug(cmp);
 				if (Object.isUndefined(cmp))
 				{
 					return null;
