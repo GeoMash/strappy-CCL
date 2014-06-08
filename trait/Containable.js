@@ -36,19 +36,11 @@ $JSKK.Trait.create
 				children		=this.getState('children');
 			
 			//If HTML has been specified, ignore children.
-			if (Object.isString(this.getState('html')))
+			if (!Object.isNull(this.getState('html')))
 			{
-				if (!Object.isNull(this.getState('bodySelector')))
-				{
-					this.getView('Main')	.getContainer()
-											.find(this.getState('bodySelector'))
-											.html('<div>'+this.getState('html')+'</div>');
-				}
-				else
-				{
-					this.getView('Main').getContainer().html('<div>'+this.getState('html')+'</div>');
-				}
+				this.renderHTML(this.getState('html'));
 				parent.fireEvent('onChildReady',this.getState('fullRef')+'.html',this);
+				this.cmp().observe('onStateChange',this.onHTMLStateChange.bind(this));
 			}
 			//HTML was not specified, so handle the children if there are any.
 			else if (!Object.isNull(children))
@@ -326,6 +318,31 @@ $JSKK.Trait.create
 			}
 			return this;
 		},
+		renderHTML: function(html)
+		{
+			if (Object.isString(html))
+			{
+				html='<div>'+html+'</div>';
+			}
+			else if (!Object.isElement(html) && Object.isUndefined(html.jquery))
+			{
+				html=String(html);
+			}
+			if (!Object.isNull(this.getState('bodySelector')))
+			{
+				this.getView('Main')	.getContainer()
+										.find(this.getState('bodySelector'))
+										.html(html);
+			}
+			else
+			{
+				this.getView('Main').getContainer().html(html);
+			}
+			if (this.getState('scrollable'))
+			{
+				this.getView('Main').initScrollable();
+			}
+		},
 		onCardStateChange: function(cmp,state,value)
 		{
 			if (state=='active')
@@ -338,6 +355,13 @@ $JSKK.Trait.create
 				{
 					this.hideCard(cmp.getState('ref'));
 				}
+			}
+		},
+		onHTMLStateChange: function(cmp,state,value)
+		{
+			if (state=='html')
+			{
+				this.renderHTML(value);
 			}
 		}
 	}
