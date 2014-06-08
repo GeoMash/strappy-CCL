@@ -155,7 +155,6 @@ $JSKK.Trait.create
 									el		=$('#'+this.childInstances[i].getIID());
 									width	=this.childInstances[i].getState('colWidth');
 									order.push(el);
-									console.debug('colWidth',width,String(width).indexOf('.'));
 									if (String(width).indexOf('.')!==0)
 									{
 										el.css('width',(width*100)+'%');
