@@ -75,6 +75,8 @@ $JSKK.Trait.create
 						 * Currently the reordering supports the following layouts:
 						 * * Auto
 						 * * Border
+						 * * Column
+						 * * Card
 						 */
 						switch (this.getState('layout'))
 						{
@@ -129,7 +131,7 @@ $JSKK.Trait.create
 									else
 									{
 										console.trace();
-										throw new Error('Region was not defined on child compon	`ent.');
+										throw new Error('Region was not defined on child component.');
 									}
 								}
 								console.debug(order);
@@ -219,8 +221,7 @@ $JSKK.Trait.create
 			{
 				child=child.record;
 			}
-			
-			if (Object.isUndefined(child.cmp))
+			if (Object.isUndefined(child.cmp) || Object.isNull(child.cmp))
 			{
 				if (!Object.isNull(this.getState('defaultChildCmp')))
 				{
