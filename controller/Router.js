@@ -40,7 +40,7 @@ $JSKK.Class.create
 		 */
 		goTo: function(path)
 		{
-			this.getStore('State').set('p',path);
+			this.setState('p',path);
 		},
 		/**
 		 * Used by the state controller to handle changes
@@ -52,7 +52,7 @@ $JSKK.Class.create
 			(
 				function()
 				{
-					return this.getStore('State').get('structureReady');
+					return this.getState('structureReady');
 				}.bind(this)
 			).isTrue
 			(
