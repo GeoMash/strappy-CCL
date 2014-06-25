@@ -22,7 +22,6 @@ $JSKK.Class.create
 		onClickableRoute: function(event)
 		{
 			var path=$(event.currentTarget).data('strappy-route');
-			console.debug(path);
 			if (Object.isString(path))
 			{
 				this.goTo(path);
@@ -52,7 +51,7 @@ $JSKK.Class.create
 			(
 				function()
 				{
-					return this.getState('structureReady');
+					return this.cmp().isReady();
 				}.bind(this)
 			).isTrue
 			(
