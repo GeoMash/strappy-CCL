@@ -10,10 +10,18 @@ $JSKK.Class.create
 	{},
 	{
 		routes:[],
-		init: function()
+		onAfterCmpInit: function()
 		{
-			this.init.$parent();
-			this.getView('Structure').observe('onReady',this.onViewReady.bind(this));
+			var view=null;
+			try
+			{
+				view=this.getView('Main');
+			}
+			catch(e)
+			{
+				view=this.getView('Structure');
+			}
+			view.observe('onReady',this.onViewReady.bind(this));
 		},
 		onViewReady: function()
 		{
