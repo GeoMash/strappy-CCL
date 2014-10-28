@@ -96,6 +96,7 @@ $JSKK.Class.create
 						else if (Object.isDefined(controller[nodes[i]]))
 						{
 							controller=controller[nodes[i]];
+							//TODO: Finish this maybe?
 						}
 						else
 						{
