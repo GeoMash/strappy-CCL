@@ -13,7 +13,7 @@ $JSKK.Trait.create
 	{
 		initScrollable: function(event)
 		{
-			$('.jspscroll').jScrollPane({horizontalDragMaxWidth: 0, verticalGutter: 3});
+			$('.jspscroll').jScrollPane({horizontalDragMaxWidth: 0, verticalDragMinHeight:30, verticalGutter: 3});
 			(function()
 			{
 				$('.jspscroll').each
@@ -34,6 +34,11 @@ $JSKK.Trait.create
 								{
 									totalChildrenHeight+=parseInt($(children[i]).height());
 								}
+								if(Object.isDefined(this.getState('scrollPadding')))
+								{
+									parentHeight+=this.getState('scrollPadding');
+									totalChildrenHeight+=this.getState('scrollPadding');
+								}
 //								console.debug(parentHeight,totalChildrenHeight);
 								if (parentHeight>totalChildrenHeight)
 								{
@@ -46,9 +51,9 @@ $JSKK.Trait.create
 								$('.jspscroll').jScrollPane({horizontalDragMaxWidth: 0, verticalGutter: 3});
 							}
 						}
-					}
+					}.bind(this)
 				);
-			}).defer(200);
+			}).defer(200, this);
 	
 //			// fix for vertical guttering which fails miserably
 //			var 
