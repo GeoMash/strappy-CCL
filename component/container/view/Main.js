@@ -6,8 +6,8 @@ $JSKK.Class.create
 		$extends:	'strappy.mvc.View',
 		$uses:
 		[
-			'strappy.ccl.trait.Scrollable'
-		],
+			//'strappy.ccl.trait.Scrollable'
+		]
 	}
 )
 (
@@ -28,7 +28,7 @@ $JSKK.Class.create
 			}
 			if (this.getState('scrollable'))
 			{
-				this.getContainer().addClass('jspscroll');
+				//this.getContainer().addClass('jspscroll');
 			}
 			// if (this.getState('relativeWrapper'))
 			// {
