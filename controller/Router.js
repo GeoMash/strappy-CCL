@@ -90,7 +90,10 @@ $JSKK.Class.create
 								args.push(nodes[i]);
 								i++;
 							}
-							controller[action].apply(controller,args);
+							if (Object.isDefined(controller[action]))
+							{
+								controller[action].apply(controller,args);
+							}
 							break;
 						}
 						else if (Object.isDefined(controller[nodes[i]]))
