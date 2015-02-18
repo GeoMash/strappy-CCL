@@ -96,9 +96,9 @@ $JSKK.Class.create
 		{
 			this.fireEvent('onFileError',this,uploader,err);
 		},
-		onFileUploaded: function(uploader,file)
+		onFileUploaded: function(uploader,file,response)
 		{
-			this.fireEvent('onFileUploaded',this,uploader,file);
+			this.fireEvent('onFileUploaded',this,uploader,file,response);
 		},
 		onFileDragOver: function(uploader,file)
 		{
