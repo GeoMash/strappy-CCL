@@ -34,7 +34,6 @@ $JSKK.Class.create
 						var	thisRef	=childRef.split('.').last(),
 							cmp		=this.getCmp(thisRef),
 							view	=null;
-						console.log(thisRef);
 						if(Object.isNull(cmp))
 						{
 							return;
