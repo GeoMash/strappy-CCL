@@ -7,7 +7,7 @@ $JSKK.Class.create
 )
 (
 	{
-		version:			'1.0.0',
+		version:			'1.1.0',
 		Signal:
 		{
 			SWITCH:			'strappy.signal.ccl.switch',
