@@ -1,0 +1,29 @@
+{
+  "name": "strappyjs",
+  "title": "Strappy-ccl",
+  "description": "Common Component Library for Strappy.",
+  "version": "1.1.0",
+  "author":
+  {
+    "name": "Timothy Chandler",
+    "email": "tim@pi-co.io",
+    "url": "https://github.com/GeoMash/strappy-CCL"
+  },
+  "homepage": "https://github.com/GeoMash/strappy-CCL",
+  "repository":
+  {
+    "type": "git",
+    "url": "git@github.com:GeoMash/strappy-CCL.git"
+  },
+  "main": "./main",
+  "devDependencies":
+  {
+    "grunt": "~0.4.4",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-requirejs": "~0.4.4",
+    "grunt-recurse": "~0.2.1",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-contrib-concat": "~0.4.0"
+  }
+}
