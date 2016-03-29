@@ -1,9 +1,9 @@
 module.exports = function(grunt)
 {
 	var BANNER=	"/*\r\n"
-				+' JSKK v<%= pkg.version %>'
-				+' | (c) 2014 Timothy Chandler <tim@geomash.com>'
-				+' | <LICENSE> '
+				+' Strappy CCL v<%= pkg.version %>'
+				+' | (c) 2014 Timothy Chandler <tim@pi-co.io>'
+				+' | See Strappy license file. '
 				+"\r\n"
 				+' Date Built: <%= grunt.template.today("yyyy-mm-dd") %>'
 				+"\r\n*/\r\n";
